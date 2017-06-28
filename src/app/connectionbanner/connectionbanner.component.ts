@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SocketServiceService } from '../socket-service.service';
 @Component({
   selector: 'app-connectionbanner',
   templateUrl: './connectionbanner.component.html',
@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnectionbannerComponent implements OnInit {
 
-  leeftijd = 20
+  connectiondata
 
-  constructor() { }
+  constructor(private socketservice:SocketServiceService) {
+
+      this.socketservice.getConnectionInfo().subscribe((data) => this.connectiondata = data)
+
+  }
 
   ngOnInit() {
   }

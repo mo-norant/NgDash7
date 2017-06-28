@@ -1,4 +1,9 @@
-<p>
-  {{leeftijd + 4}}
-</p>
+<md-toolbar color="primary">
+    <span>OSS7 | Connected to {{connectiondata.uid}} using D7AP version {{connectiondata.d7ap_version}} and running application {{connectiondata.application_name}}</span>
+    <md-toolbar-row>
+        <button routerLink="/" md-button>Home</button>
+        <button routerLink="/files" md-button>Files</button>
+        <button routerLink="/aplcommands" md-button>APL Commands</button>
 
+    </md-toolbar-row>
+</md-toolbar>
