@@ -7,11 +7,11 @@ import { SocketServiceService } from '../socket-service.service';
 })
 export class ConnectionbannerComponent implements OnInit {
 
-  connectiondata
+  connectiondata;
 
   constructor(private socketservice:SocketServiceService) {
 
-      this.socketservice.getConnectionInfo().subscribe((data) => this.connectiondata = data)
+      this.socketservice.getConnectionInfo().subscribe((data) => this.connectiondata = data);
 
   }
 

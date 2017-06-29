@@ -1,0 +1,11 @@
+.table th {
+    text-align: center;
+}
+
+.table {
+    border-radius: 5px;
+    border-color: black;
+    width: 50%;
+    float: none;
+    margin: 0 auto;
+}
