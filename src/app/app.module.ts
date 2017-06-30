@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { AppComponent } from './app.component';
 import { ConnectionbannerComponent } from './connectionbanner/connectionbanner.component';
 import { ALPcommandsComponent } from './alpcommands/alpcommands.component';
@@ -19,7 +18,9 @@ import { MdToolbarModule, MdButtonModule, MdListModule} from '@angular/material'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+
 import { SocketServiceService } from './socket-service.service';
+import { FileclassifierService} from './fileclassifier.service';
 
 
  const routes: Routes = [
@@ -58,7 +59,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     BootstrapModalModule
 
   ],
-  providers: [SocketServiceService],
+  providers: [SocketServiceService, FileclassifierService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
