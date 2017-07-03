@@ -1,21 +1,23 @@
-<section class="mat-typography">
-    <h1 class="headline">Files</h1>
+<div class="container">
+    <h4> <strong>Files</strong></h4>
+    <table class="highlight">
+        <thead>
+            <tr>
+                <td><strong>Id</strong></td>
+                <td><strong>Filename</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor=" let file of files; let i=i ndex " [routerLink]="[ '/file', file.file_id] ">
+                <td>{{file.file_id}}</td>
+                <td>{{file.file_name}}</td>
+            </tr>
 
-
-    <table class="table table-striped table-bordered table-hover">
-
-        <tr>
-            <td><strong>Id</strong></td>
-            <td><strong>Filename</strong></td>
-        </tr>
-
-        <tr *ngFor="let file of files; let i = index" [routerLink]="['/file', file.file_id]">
-            <td>{{file.file_id}}</td>
-            <td>{{file.file_name}}</td>
-        </tr>
-
-
+        </tbody>
     </table>
 
 
-</section>
+</div>
+
+
+<simple-notifications [options]="notificationOptions "></simple-notifications>

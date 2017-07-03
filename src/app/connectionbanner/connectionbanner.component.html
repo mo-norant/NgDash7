@@ -1,9 +1,11 @@
-<md-toolbar color="primary">
-    <span>OSS7 | Connected to {{connectiondata?.uid}} using D7AP version {{connectiondata?.d7ap_version}} and running application {{connectiondata?.application_name}}</span>
-    <md-toolbar-row>
-        <button routerLink="/" md-button>Home</button>
-        <button routerLink="/files" md-button>Files</button>
-        <button routerLink="/aplcommands" md-button>APL Commands</button>
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo right">OSS Dash7</a>
 
-    </md-toolbar-row>
-</md-toolbar>
+        <ul id="nav-mobile">
+            <li><a class="waves-effect waves-light btn" routerLink="/"><i class="material-icons left">view_module</i>Home</a></li>
+            <li><a class="waves-effect waves-light btn" routerLink="/files"><i class="material-icons left">library_books</i>Files</a></li>
+            <li><a class="waves-effect waves-light btn" routerLink="/aplcommands"><i class="material-icons left">import_export</i> APL Commands</a></li>
+        </ul>
+    </div>
+</nav>

@@ -4,6 +4,8 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Http, Response } from '@angular/http';
 
+
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -18,7 +20,7 @@ export class SocketServiceService {
     FILES: 1
   };
 
-
+  
 
   constructor(private socket: Socket, private http: Http) {
 
@@ -67,11 +69,11 @@ export class SocketServiceService {
   public readFile(file_id) {
     const observable = new Observable(observer => {
       this.socket.emit('read_local_system_file', { 'system_file_id': file_id }, (response_data) => {
-        
-        observer.next (response_data.tag_id);
+
+        observer.next(response_data.tag_id);
       });
 
-      return () =>{
+      return () => {
         this.socket.disconnect();
       }
     })

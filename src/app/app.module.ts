@@ -10,24 +10,33 @@ import { ALPcommandsComponent } from './alpcommands/alpcommands.component';
 import { FilesComponent } from './files/files.component';
 import { LandingComponent } from './landing/landing.component';
 import { FileviewComponent } from './fileview/fileview.component';
+import { UIDComponent } from './fileview/filetypes/uid/uid.component';
+import { FirmwareVersionComponent } from './fileview/filetypes/firmware-version/firmware-version.component';
+import { DLLConfigComponent } from './fileview/filetypes/dll-config/dll-config.component';
+import { AccessProfileComponent } from './fileview/filetypes/access-profile/access-profile.component';
 
 import { SocketIoModule, SocketIoConfig } from 'ng2-socket-io';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdToolbarModule, MdButtonModule, MdListModule} from '@angular/material';
+import { MdToolbarModule, MdButtonModule, MdListModule, MdInputModule, MdSelectModule} from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
+
 import { SocketServiceService } from './socket-service.service';
 import { FileclassifierService} from './fileclassifier.service';
+import { ChannelheaderService } from './channelheader.service';
+import { FooterComponent } from './footer/footer.component'
+
 
 
  const routes: Routes = [
   { path: 'files', component: FilesComponent },
   { path: '', component: LandingComponent },
   { path: 'aplcommands', component: ALPcommandsComponent},
-  { path: 'file/:id', component: FileviewComponent}
+  { path: 'file/:id', component: FileviewComponent},
+  
 
 ];
 
@@ -41,7 +50,12 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ALPcommandsComponent,
     FilesComponent,
     LandingComponent,
-    FileviewComponent
+    FileviewComponent,
+    UIDComponent,
+    FirmwareVersionComponent,
+    DLLConfigComponent,
+    AccessProfileComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -56,10 +70,14 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     MdListModule,
     NgbModule,
     ModalModule.forRoot(),
-    BootstrapModalModule
+    BootstrapModalModule,
+    MdInputModule,
+    MdSelectModule
 
   ],
-  providers: [SocketServiceService, FileclassifierService],
-  bootstrap: [AppComponent]
+  providers: [SocketServiceService, FileclassifierService, ChannelheaderService],
+  bootstrap: [AppComponent],
+  entryComponents: [UIDComponent, FirmwareVersionComponent, DLLConfigComponent, AccessProfileComponent],
+
 })
 export class AppModule { }

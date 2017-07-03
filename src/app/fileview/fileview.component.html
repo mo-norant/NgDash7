@@ -1,13 +1,12 @@
-<div class="card">
-    <div class="container">
-        <h4><b>Filename</b></h4>
-        <p>Fileid | filesize</p>
-    </div>
-</div>
+<div class="container">
 
-<div class="card">
-    <div class="container">
-        <h4><b>Filecontent</b></h4>
-        <p ng-if="isSameTagId">{{filedata | json}}</p>
+    <div class="customcontainer">
+        <h4><strong>{{filetitle}}</strong></h4>
+        <p>Fileid: {{fileid}}</p>
     </div>
+    <div class="customcontainer">
+        <div #formcontainer></div>
+    </div>
+
 </div>
+<simple-notifications [options]="notificationOptions"></simple-notifications>

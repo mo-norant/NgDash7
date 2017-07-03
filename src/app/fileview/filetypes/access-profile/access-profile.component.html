@@ -1,0 +1,23 @@
+<h5> CHANNEL HEADER</h5>
+<div class="row">
+    <md-select placeholder="Channelband" [(ngModel)]="selectedChannelBand" name="Channelband">
+        <md-option *ngFor="let channelband of channelBands" [value]="channelband.value">
+            {{channelband.value}}
+        </md-option>
+    </md-select>
+</div>
+<div class="row">
+    <md-select placeholder="Channelcoding" [(ngModel)]="selectedChannelCoding" name="Channelcoding">
+        <md-option *ngFor="let channelcoding of channelCodings" [value]="channelcoding.value">
+            {{channelcoding.value}}
+        </md-option>
+    </md-select>
+</div>
+<div class="row">
+
+    <md-select placeholder="Channelclass" [(ngModel)]="selectedchannelClass" name="Channelclass">
+        <md-option *ngFor="let channelclass of channelClasses" [value]="channelclass.value">
+            {{channelclass.value}}
+        </md-option>
+    </md-select>
+</div>
