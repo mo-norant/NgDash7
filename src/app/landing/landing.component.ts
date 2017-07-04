@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketServiceService } from '../socket-service.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  fileCount:number
+
+  constructor(public socketServiceService: SocketServiceService) { }
 
   ngOnInit() {
+  //this.fileCount = this.socketServiceService.getFileCount()
   }
 
 }

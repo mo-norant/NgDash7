@@ -19,6 +19,7 @@ export class SocketServiceService {
     COMMANDS: 0,
     FILES: 1
   };
+  fileCount: number;
 
   
 

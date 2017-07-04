@@ -7,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DLLConfigComponent implements OnInit {
 filedata
+formdata
   constructor() { }
 
   ngOnInit() {
-    console.log(this.filedata)
+    console.log(this.filedata);
+  }
+  onSubmit() {
+    console.log(this.formdata)
   }
 
 }
