@@ -7,14 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DLLConfigComponent implements OnInit {
 filedata
-formdata
+model;
+
   constructor() { }
 
   ngOnInit() {
     console.log(this.filedata);
   }
   onSubmit() {
-    console.log(this.formdata)
+    this.model.ActiveAccesClass = "test"
+    console.log(this.model)
   }
 
 }
