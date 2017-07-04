@@ -12,7 +12,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class SocketServiceService {
 
-  private url = 'http://localhost:5000';
+  url = 'http://localhost:5000';
   tag_to_destination_model = {};
   tag_to_file_id = {};
   destination_model = {
@@ -21,7 +21,7 @@ export class SocketServiceService {
   };
   fileCount: number;
 
-  
+
 
   constructor(private socket: Socket, private http: Http) {
 
@@ -60,7 +60,7 @@ export class SocketServiceService {
   }
 
   public getAllFiles() {
-    return this.http.get("http://localhost:5000/systemfiles")
+    return this.http.get(this.url + "/systemfiles")
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || "servererror"))
 
@@ -83,9 +83,22 @@ export class SocketServiceService {
 
   }
 
+  public writeFile(file_data) {
 
+    const observable = new Observable(observer => {
+      this.socket.emit('write_local_system_file', file_data, callbackdata => {
+        observer.next(callbackdata);
+      });
 
+      return () => {
+        this.socket.disconnect();
+      }
+    });
+
+    return observable;
+  }
 
 
 
 }
+

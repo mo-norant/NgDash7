@@ -1,6 +1,5 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
-import { SocketServiceService } from '../socket-service.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { UIDComponent } from './filetypes/uid/uid.component'
@@ -8,7 +7,7 @@ import { FirmwareVersionComponent } from './filetypes/firmware-version/firmware-
 import { DLLConfigComponent } from './filetypes/dll-config/dll-config.component'
 import { AccessProfileComponent} from './filetypes/access-profile/access-profile.component'
 
-
+import { SocketServiceService } from '../socket-service.service';
 import { NotificationsService } from 'angular2-notifications';
 import { FileclassifierService } from '../fileclassifier.service';
 

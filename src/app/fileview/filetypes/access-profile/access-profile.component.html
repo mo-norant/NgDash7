@@ -1,23 +1,35 @@
 <h5> CHANNEL HEADER</h5>
 <div class="row">
-    <md-select placeholder="Channelband" [(ngModel)]="selectedChannelBand" name="Channelband">
-        <md-option *ngFor="let channelband of channelBands" [value]="channelband.value">
-            {{channelband.value}}
-        </md-option>
-    </md-select>
-</div>
-<div class="row">
-    <md-select placeholder="Channelcoding" [(ngModel)]="selectedChannelCoding" name="Channelcoding">
-        <md-option *ngFor="let channelcoding of channelCodings" [value]="channelcoding.value">
-            {{channelcoding.value}}
-        </md-option>
-    </md-select>
-</div>
-<div class="row">
 
-    <md-select placeholder="Channelclass" [(ngModel)]="selectedchannelClass" name="Channelclass">
-        <md-option *ngFor="let channelclass of channelClasses" [value]="channelclass.value">
-            {{channelclass.value}}
-        </md-option>
-    </md-select>
+    <form #fileform="ngForm" (ngSubmit)="onSubmit(fileform.value)">
+        <div class="row">
+            <div class="col s12">
+                <button class="btn waves-effect waves-light right spacebelow" type="submit" name="action">Save
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <md-select [(ngModel)]="filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_band.value" name="Channelband">
+                <md-option *ngFor="let channelband of channelBands" [value]="channelband.value">
+                    {{channelband.value}}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="row">
+            <md-select [(ngModel)]="filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_coding.value" name="Channelcoding">
+                <md-option *ngFor="let channelcoding of channelCodings" [value]="channelcoding.value">
+                    {{channelcoding.value}}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="row">
+
+            <md-select [(ngModel)]="filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_class.value" name="Channelclass">
+                <md-option *ngFor="let channelclass of channelClasses" [value]="channelclass.value">
+                    {{channelclass.value}}
+                </md-option>
+            </md-select>
+        </div>
+    </form>
 </div>
