@@ -87,6 +87,7 @@ export class SocketServiceService {
 
     const observable = new Observable(observer => {
       this.socket.emit('write_local_system_file', file_data, callbackdata => {
+        console.log(callbackdata)
         observer.next(callbackdata);
       });
 

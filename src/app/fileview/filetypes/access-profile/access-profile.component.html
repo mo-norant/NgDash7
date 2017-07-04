@@ -10,22 +10,21 @@
             </div>
         </div>
         <div class="row">
-            <md-select [(ngModel)]="filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_band.value" name="Channelband">
+            <md-select [(ngModel)]="selectedBand" name="Channelband">
                 <md-option *ngFor="let channelband of channelBands" [value]="channelband.value">
                     {{channelband.value}}
                 </md-option>
             </md-select>
         </div>
         <div class="row">
-            <md-select [(ngModel)]="filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_coding.value" name="Channelcoding">
+            <md-select [(ngModel)]="selectedCoding" name="Channelcoding">
                 <md-option *ngFor="let channelcoding of channelCodings" [value]="channelcoding.value">
                     {{channelcoding.value}}
                 </md-option>
             </md-select>
         </div>
         <div class="row">
-
-            <md-select [(ngModel)]="filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_class.value" name="Channelclass">
+            <md-select [(ngModel)]="selectedClass" name="Channelclass">
                 <md-option *ngFor="let channelclass of channelClasses" [value]="channelclass.value">
                     {{channelclass.value}}
                 </md-option>

@@ -14,12 +14,22 @@ export class AccessProfileComponent implements OnInit {
   channelCodings
   channelClasses
   
+  selectedBand
+  selectedCoding
+  selectedClass
 
-  constructor(private ChannelheaderService: ChannelheaderService, private socketService: SocketServiceService) { }
+  constructor(private ChannelheaderService: ChannelheaderService, private socketService: SocketServiceService) {
+        this.fillAllOptions();
+
+  }
 
   ngOnInit() {
-    this.fillAllOptions();
+ 
     console.log(this.filedata)
+
+        this.selectedBand = this.filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_band.value
+        this.selectedCoding = this.filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_coding.value
+        this.selectedClass = this.filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_class.value
   }
 
   private fillAllOptions() {
@@ -37,8 +47,8 @@ export class AccessProfileComponent implements OnInit {
     let data = {
       "data": {
         "py/object": "d7a.system_files.access_profile.AccessProfileFile",
-        "length": this.filedata.data.length,
-        "id": this.filedata.data.id,
+        "length": this.filedata.response_command.actions[0].operation.file_data_parsed.length,
+        "id": this.filedata.response_command.actions[0].operation.file_data_parsed.id,
         "access_profile": {
           "py/object": "d7a.dll.access_profile.AccessProfile",
           "sub_bands": [
@@ -111,7 +121,7 @@ export class AccessProfileComponent implements OnInit {
             "py/object": "d7a.phy.channel_header.ChannelHeader",
             "channel_class": {
               "py/object": "d7a.phy.channel_header.ChannelClass",
-              "value": event.Channelclass
+             "value": event.Channelclass
             },
             "channel_coding": {
               "py/object": "d7a.phy.channel_header.ChannelCoding",
@@ -161,13 +171,15 @@ export class AccessProfileComponent implements OnInit {
             }
           ]
         },
-        "access_specifier": this.filedata.data.access_specifier
+        "access_specifier": this.filedata.response_command.actions[0].operation.file_data_parsed.access_specifier
       },
-      "file_id": this.filedata.file_id,
-      "file_name": this.filedata.file_name,
-      "id": this.filedata.id
+      "file_id": this.filedata.response_command.actions[0].operation.file_data_parsed.id,
+      "file_name":"ACCESS_PROFILE_1",
+      "id":1499173307359
+      
     }
 
+    console.log(data)
     this.socketService.writeFile(data).subscribe(callbackdata => console.log(callbackdata))
 
 
