@@ -1,5 +1,5 @@
 <div class="row">
-    <form (ngSubmit)="onSubmit()" #formdata="ngForm">
+    <form #fileform="ngForm" (ngSubmit)="onSubmit(fileform.value)">
         <div class="row">
             <div class="col s12">
                 <button class="btn waves-effect waves-light right spacebelow" type="submit" name="action">Save
@@ -11,31 +11,31 @@
         <div class="row">
             <div class="input-field col s6">
                 <label for="Active Acces Class">Active Acces Class</label><br>
-                <input [(ngModel)]="model.ActiveAccesClass" placeholder="Active Access Class" value="{{filedata?.response_command.actions[0].operation.file_data_parsed.active_access_class}}" number>
+                <input name="ActiveAccesClass" [(ngModel)]="filedata?.response_command.actions[0].operation.file_data_parsed.active_access_class" number>
             </div>
-            <div class="input-field col s6">
-                <label for="VID">Virtual id</label><br>
-                <input [(ngModel)]="model.VID" placeholder="VID" value="{{filedata?.response_command.actions[0].operation.file_data_parsed.vid}}" number>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="LQfilter">Lq filter</label><br>
-                <input [(ngModel)]="model.Lqfilter" placeholder="LQ Filter" value="NOT IMPLEMENTED" number>
-            </div>
-            <div class="input-field col s6">
-                <label for="NFCTRL">NFCTRL</label><br>
-                <input [(ngModel)]="model.NFCTRL" placeholder="NFCTRL" value="NOT IMPLEMENTED" number>
+            <div class="input-field col s6 ">
+                <label for="VID ">Virtual id</label><br>
+                <input name="VID" [(ngModel)]="filedata?.response_command.actions[0].operation.file_data_parsed.vid " number>
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="RXNF">RX NF method parameter</label><br>
-                <input [(ngModel)]="model.RXNF" placeholder="RX NF Method Parameter" value="NOT IMPLEMENTED" number>
+        <div class="row ">
+            <div class="input-field col s6 ">
+                <label for="LQfilter ">Lq filter</label><br>
+                <input name="LQfilter" [(ngModel)]="NOTIMPLEMENTED" number>
             </div>
-            <div class="input-field col s6">
-                <label for="TXNF">TX NF method parameter</label><br>
-                <input [(ngModel)]="model.TXNF" placeholder="TX NF Method Parameter" value="NOT IMPLEMENTED" number>
+            <div class="input-field col s6 ">
+                <label for="NFCTRL ">NFCTRL</label><br>
+                <input name="NFCTRL" [(ngModel)]="NOTIMPLEMENTED" number>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="input-field col s6 ">
+                <label for="RXNF ">RX NF method parameter</label><br>
+                <input name="RXNF" [(ngModel)]="NOTIMPLEMENTED" number>
+            </div>
+            <div class="input-field col s6 ">
+                <label for="TXNF ">TX NF method parameter</label><br>
+                <input name="TXNF" [(ngModel)]="NOTIMPLEMENTED" number>
             </div>
         </div>
 

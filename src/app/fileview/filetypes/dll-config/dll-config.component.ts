@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-dll-config',
   templateUrl: './dll-config.component.html',
@@ -7,16 +6,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DLLConfigComponent implements OnInit {
 filedata
-model;
+NOTIMPLEMENTED = "NOT IMPLEMENTED"
+
+
+
 
   constructor() { }
 
   ngOnInit() {
     console.log(this.filedata);
   }
-  onSubmit() {
-    this.model.ActiveAccesClass = "test"
-    console.log(this.model)
+  onSubmit(event) {
+
+    console.log(event)
+
   }
 
 }
