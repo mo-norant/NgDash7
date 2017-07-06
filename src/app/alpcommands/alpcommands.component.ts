@@ -27,23 +27,17 @@ modalbody = `
 
   constructor(public socketService: SocketServiceService, public modal: Modal) {
 
-    this.socketService.recieveAPLcommand().subscribe(data => {this.socketService.setList(data);
-    this.listdata = this.socketService.getList()})
-
-
-
-      
-    this.modal.alert()
-     );
-  }   .size('lg')
-        .showClose(true)
-        .title('A simple Alert style modal window')
-        .body(this.modalbody)
-        .open(
-
-  
+  }
 
   ngOnInit() {
+
+     this.socketService.onALPCommandReceivedSubject().subscribe(res => {
+      this.listdata.push(res)
+     });
+  }
+
+  modalopener(event){
+    console.log(event)
   }
 
 }

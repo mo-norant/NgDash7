@@ -21,30 +21,44 @@ export class FileviewComponent implements OnInit {
   @ViewChild('formcontainer', { read: ViewContainerRef }) formcontainer;
 
   fileid;
-  Emitid;
+  Emitid = -1; // invalid tag-id
   Controlid;
   filedata;
   filetitle;
   isSameTagId = false;
 
-  fileObserver
 
-  constructor( private resolver: ComponentFactoryResolver, private socketservice: SocketServiceService, private route: ActivatedRoute, private fileclassifierService: FileclassifierService) {
+  constructor(
+              private resolver: ComponentFactoryResolver,
+              private socketservice: SocketServiceService,
+              private route: ActivatedRoute,
+              private _fileclassifierService: FileclassifierService) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.fileid = +params['id'];
-      this.filetitle = this.fileclassifierService.getFileSpecification(this.fileid);
+      this.filetitle = this._fileclassifierService.getFileSpecification(this.fileid);
     });
 
-    this.socketservice.readFile(this.fileid).subscribe(data => { this.Emitid = data; });
-    this.fileObserver =  this.socketservice.recieveAPLcommand().subscribe(data => {
-      this.filedata = data;
-      this.isSameTagId = (this.Emitid === this.filedata.tag_id)
-      this.createComponentContainer(this.fileid)
-    })
 
+
+    this.socketservice.onALPCommandReceivedSubject().subscribe(res => {
+      console.log('fileview');
+      console.log(res);
+      if(res.tag_id !== this.Emitid) {
+        console.log('skipping');
+      } else {
+        console.log('tag-id matches');
+        this.filedata = res;
+        this.createComponentContainer(this.fileid);
+      }
+    });
+
+    this.socketservice.readFile(this.fileid).subscribe(tag_id => {
+      console.log('!!!');
+      this.Emitid = Number(tag_id);
+    });
   }
 
   private createComponentContainer(FileID) {
@@ -52,9 +66,12 @@ export class FileviewComponent implements OnInit {
     let component = this.getComponent(this.fileid);
     const FileFactory = this.resolver.resolveComponentFactory(component);
     let FileContainer = this.formcontainer.createComponent(FileFactory);
-    
+
     //Linkdata to childinstance of file
     
+    FileContainer.instance.filedata = this.filedata;
+
+
   }
 
   public getComponent(id): any {

@@ -10,8 +10,7 @@ export class FirmwareVersionComponent implements OnInit {
   filedata
   constructor(private socketservice: SocketServiceService) {
 
-    this.socketservice.recieveAPLcommand().subscribe(data => this.filedata = data);
-
+    console.log(this.filedata)
 
    }
 

@@ -10,7 +10,4 @@ export class AppComponent {
 
   constructor(private _service: NotificationsService) {}
 
-
-
-
 }
