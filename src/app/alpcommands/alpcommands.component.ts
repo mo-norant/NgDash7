@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SocketServiceService} from "../socket-service.service";
 
 @Component({
   selector: 'app-alpcommands',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ALPcommandsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private socketservice: SocketServiceService) {
   }
 
+  ngOnInit() {
+    this.socketservice.onALPCommandReceivedSubject().subscribe(res => {
+      console.log(res);
+    });
+  }
 }

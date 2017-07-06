@@ -21,17 +21,21 @@ export class SocketServiceService {
   };
   fileCount: number;
 
-
+  private subject = new Subject<any>();
 
   constructor(private socket: Socket, private http: Http) {
-
-
-
     this.socket.connect();
     this.socket.on('connect', function () {
       console.log('connected');
     });
+    this.socket.on('received_alp_command', (data) => {
+      console.log('received_alp_command');
+      this.subject.next(data);
+    });
+  }
 
+  onALPCommandReceivedSubject(): Subject<any> {
+    return this.subject;
   }
 
   public getConnectionInfo() {
@@ -46,41 +50,24 @@ export class SocketServiceService {
     return observable;
   }
 
-  public recieveAPLcommand() {
-    const observable = new Observable(observer => {
-      this.socket.on('received_alp_command', (data) => {
-        observer.next(data);
-      });
-
-      return () => {
-        this.socket.disconnect();
-      }
-    })
-    return observable;
-  }
-
   public getAllFiles() {
     return this.http.get(this.url + "/systemfiles")
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || "servererror"))
-
   }
-
 
   public readFile(file_id) {
     const observable = new Observable(observer => {
       this.socket.emit('read_local_system_file', { 'system_file_id': file_id }, (response_data) => {
-
         observer.next(response_data.tag_id);
       });
 
       return () => {
         this.socket.disconnect();
-      }
+      };
     })
 
-    return observable
-
+    return observable;
   }
 
   public writeFile(file_data) {
