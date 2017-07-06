@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy ,ViewContainerRef, ViewEncapsulation  } from '@angular/core';
 import { SocketServiceService } from '../socket-service.service';
 import { Observable } from 'rxjs/Observable';
 import { Overlay, overlayConfigFactory } from 'angular2-modal';
@@ -10,7 +10,7 @@ import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
   styleUrls: ['./alpcommands.component.css'],
   providers : [Modal]
 })
-export class ALPcommandsComponent implements OnInit {
+export class ALPcommandsComponent implements OnInit, OnDestroy {
 
 modalbody = `
             <h4>{{listdata}}</h4>
@@ -32,12 +32,21 @@ modalbody = `
   ngOnInit() {
 
      this.socketService.onALPCommandReceivedSubject().subscribe(res => {
-      this.listdata.push(res)
+      this.listdata.push(res);
      });
   }
 
   modalopener(event){
-    console.log(event)
+    
+    this.modal.alert()
+    .title(event)
+    .body(JSON.stringify(this.listdata[event]))
+    .open();
+
+  }
+
+
+  ngOnDestroy(){
   }
 
 }

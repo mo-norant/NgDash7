@@ -50,7 +50,7 @@ export class FileviewComponent implements OnInit {
         console.log('skipping');
       } else {
         console.log('tag-id matches');
-        this.filedata = res;
+        this.filedata = res ;
         this.createComponentContainer(this.fileid);
       }
     });
@@ -68,8 +68,8 @@ export class FileviewComponent implements OnInit {
     let FileContainer = this.formcontainer.createComponent(FileFactory);
 
     //Linkdata to childinstance of file
-    
-    FileContainer.instance.filedata = this.filedata;
+    console.log(this.filedata)
+    FileContainer.instance.filedata = this.filedata.response_command.actions[0].operation.file_data_parsed;
 
 
   }

@@ -12,16 +12,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of listdata" (click)="modalopener($event)">
+            <tr *ngFor="let item of listdata ; let i = index " (click)="modalopener(i)">
                 <td><strong>{{item.tag_id}}</strong></td>
                 <td><strong>FILLER</strong></td>
                 <td><strong>FILLER</strong></td>
-                <td><strong>FILLER</strong></td>
+                <td><strong></strong></td>
                 <td><strong>{{item.response_command_description}}</strong></td>
             </tr>
-
-
-
         </tbody>
     </table>
 </div>

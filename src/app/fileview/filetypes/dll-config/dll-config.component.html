@@ -11,11 +11,11 @@
         <div class="row">
             <div class="input-field col s6">
                 <label for="Active Acces Class">Active Acces Class</label><br>
-                <input name="ActiveAccesClass" [(ngModel)]="filedata?.response_command.actions[0].operation.file_data_parsed.active_access_class" number>
+                <input name="ActiveAccesClass" [(ngModel)]="filedata.active_access_class" type="number">
             </div>
             <div class="input-field col s6 ">
                 <label for="VID ">Virtual id</label><br>
-                <input name="VID" [(ngModel)]="filedata?.response_command.actions[0].operation.file_data_parsed.vid" number>
+                <input name="VID" [(ngModel)]="filedata.vid" type="number">
             </div>
         </div>
         <div class="row ">
