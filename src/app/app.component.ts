@@ -8,18 +8,9 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class AppComponent {
 
-  public options = {
-    position: ["bottom", "left"],
-    timeOut: 5000,
-    lastOnBottom: true
-  };
-
-  constructor(private _service: NotificationsService) {
+  constructor(private _service: NotificationsService) {}
 
 
-  }
 
-
- 
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild, OnDestroy } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,7 +8,6 @@ import { DLLConfigComponent } from './filetypes/dll-config/dll-config.component'
 import { AccessProfileComponent} from './filetypes/access-profile/access-profile.component'
 
 import { SocketServiceService } from '../socket-service.service';
-import { NotificationsService } from 'angular2-notifications';
 import { FileclassifierService } from '../fileclassifier.service';
 
 
@@ -21,14 +20,6 @@ export class FileviewComponent implements OnInit {
 
   @ViewChild('formcontainer', { read: ViewContainerRef }) formcontainer;
 
-  public notificationOptions = {
-    showProgressBar: true,
-    pauseOnHover: false,
-    clickToClose: true,
-    timeOut: 2000,
-    position: ["bottom", "right"],
-  };
-
   fileid;
   Emitid;
   Controlid;
@@ -36,26 +27,23 @@ export class FileviewComponent implements OnInit {
   filetitle;
   isSameTagId = false;
 
-  constructor(private notificationService: NotificationsService, private resolver: ComponentFactoryResolver, private socketservice: SocketServiceService, private route: ActivatedRoute, private _fileclassifierService: FileclassifierService) {
+  fileObserver
+
+  constructor( private resolver: ComponentFactoryResolver, private socketservice: SocketServiceService, private route: ActivatedRoute, private fileclassifierService: FileclassifierService) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.fileid = +params['id'];
-      this.filetitle = this._fileclassifierService.getFileSpecification(this.fileid);
+      this.filetitle = this.fileclassifierService.getFileSpecification(this.fileid);
     });
 
-
     this.socketservice.readFile(this.fileid).subscribe(data => { this.Emitid = data; });
-
-    this.socketservice.recieveAPLcommand().subscribe(data => {
-      this.notificationService.success("File received")
+    this.fileObserver =  this.socketservice.recieveAPLcommand().subscribe(data => {
       this.filedata = data;
       this.isSameTagId = (this.Emitid === this.filedata.tag_id)
       this.createComponentContainer(this.fileid)
-    });
-
-
+    })
 
   }
 
@@ -66,9 +54,7 @@ export class FileviewComponent implements OnInit {
     let FileContainer = this.formcontainer.createComponent(FileFactory);
     
     //Linkdata to childinstance of file
-    FileContainer.instance.filedata = this.filedata;
     
-
   }
 
   public getComponent(id): any {
@@ -91,11 +77,8 @@ export class FileviewComponent implements OnInit {
       case 11: return 'TRL_STATUS';
       case 12: return 'SEL_CONFIGURATION';
       case 13: return 'SEL_STATUS';
-
     }
-
   }
 
-
-
+  
 }

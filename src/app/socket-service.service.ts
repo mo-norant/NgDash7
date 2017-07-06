@@ -13,6 +13,8 @@ import 'rxjs/add/operator/catch';
 export class SocketServiceService {
 
   url = 'http://localhost:5000';
+  listdata = [];
+
   tag_to_destination_model = {};
   tag_to_file_id = {};
   destination_model = {
@@ -46,11 +48,14 @@ export class SocketServiceService {
     return observable;
   }
 
+
   public recieveAPLcommand() {
     const observable = new Observable(observer => {
       this.socket.on('received_alp_command', (data) => {
+        console.log(data)
         observer.next(data);
       });
+      
 
       return () => {
         this.socket.disconnect();
@@ -70,7 +75,6 @@ export class SocketServiceService {
   public readFile(file_id) {
     const observable = new Observable(observer => {
       this.socket.emit('read_local_system_file', { 'system_file_id': file_id }, (response_data) => {
-
         observer.next(response_data.tag_id);
       });
 
@@ -87,7 +91,6 @@ export class SocketServiceService {
 
     const observable = new Observable(observer => {
       this.socket.emit('write_local_system_file', file_data, callbackdata => {
-        console.log(callbackdata)
         observer.next(callbackdata);
       });
 
@@ -97,6 +100,19 @@ export class SocketServiceService {
     });
 
     return observable;
+  }
+
+  public setList(item){
+    console.log(item)
+    this.listdata.push(item)
+  }
+
+  public getList(){
+    return this.listdata
+  }
+
+  public clearList() {
+    this.listdata = [];
   }
 
 

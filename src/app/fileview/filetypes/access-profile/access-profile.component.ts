@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { ChannelheaderService } from '../../../channelheader.service'
 import { SocketServiceService } from '../../../socket-service.service';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-access-profile',
@@ -19,24 +20,24 @@ export class AccessProfileComponent implements OnInit {
   selectedClass
 
   constructor(private ChannelheaderService: ChannelheaderService, private socketService: SocketServiceService) {
-        this.fillAllOptions();
 
+  
   }
 
   ngOnInit() {
  
-    console.log(this.filedata)
-
-        this.selectedBand = this.filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_band.value
-        this.selectedCoding = this.filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_coding.value
-        this.selectedClass = this.filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_class.value
+      this.fillAllOptions();
+      this.selectedBand = this.filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_band.value
+      this.selectedCoding = this.filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_coding.value
+      this.selectedClass = this.filedata.response_command.actions[0].operation.file_data_parsed.access_profile.channel_header.channel_class.value
   }
 
+  
   private fillAllOptions() {
 
     this.ChannelheaderService.getChannelBands().subscribe(data => this.channelBands = data);
     this.ChannelheaderService.getChannelCodings().subscribe(data => this.channelCodings = data);
-    this.ChannelheaderService.getChannelClasses().subscribe(data => this.channelClasses = data);
+   this.ChannelheaderService.getChannelClasses().subscribe(data => this.channelClasses = data);
 
   }
 

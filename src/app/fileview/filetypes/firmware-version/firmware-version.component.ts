@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SocketServiceService } from '../../../socket-service.service'
 @Component({
   selector: 'app-firmware-version',
   templateUrl: './firmware-version.component.html',
@@ -8,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class FirmwareVersionComponent implements OnInit {
 
   filedata
-  constructor() { }
+  constructor(private socketservice: SocketServiceService) {
+
+    this.socketservice.recieveAPLcommand().subscribe(data => this.filedata = data);
+
+
+   }
 
   ngOnInit() {
-    console.log(this.filedata)
+    
   }
 
 }
